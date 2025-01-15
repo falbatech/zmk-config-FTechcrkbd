@@ -23,6 +23,9 @@
         zmk,kscan = &kscan0;
         zmk,physical-layout = &foostan_corne_6col_layout;
     };
+&led_strip {
+    chain-length = <27>;
+};
 
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
