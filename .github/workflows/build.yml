@@ -1,6 +1,34 @@
-name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
+
+name: Build ZMK Firmware
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-22.04  # Ustawiamy stabilną wersję Ubuntu
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install west
+
+      - name: Initialize West and Update
+        run: |
+          west init -l .
+          west update
+
+      - name: Build firmware for left half
+        run: |
+          west build -s zmk/app -b nice_nano_v2 -- -DZMK_CONFIG=config -DSHIELD=corne_left
+
+      - name: Build firmware for right half
+        run: |
+          west build -s zmk/app -b nice_nano_v2 -- -DZMK_CONFIG=config -DSHIELD=corne_right
