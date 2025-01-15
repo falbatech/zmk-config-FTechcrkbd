@@ -7,7 +7,7 @@
     &underglow {
         compatible = "zmk,rgb-underglow";
         pin = <P0.06>;  # Pin danych LED (sprawdź, czy poprawny)
-        num_leds = <54>;  # Liczba diod
+        num_leds = <27>;  # Liczba diod
     };
 };
 #include "corne.dtsi"
