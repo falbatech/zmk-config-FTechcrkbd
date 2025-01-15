@@ -1,15 +1,6 @@
+name: Build ZMK firmware
+on: [push, pull_request, workflow_dispatch]
+
 jobs:
   build:
-    runs-on: ubuntu-22.04  # Ustaw konkretną wersję Ubuntu
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install west
-        run: pip3 install west
-
-      - name: Build firmware for left half
-        run: west build -s zmk/app -b nice_nano_v2 -- -DZMK_CONFIG=config -DSHIELD="corne_left"
-
-      - name: Build firmware for right half
-        run: west build -s zmk/app -b nice_nano_v2 -- -DZMK_CONFIG=config -DSHIELD="corne_right"
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
