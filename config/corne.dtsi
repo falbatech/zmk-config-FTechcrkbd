@@ -17,7 +17,7 @@
     transform = <&five_column_transform>;
 };
 
-/ {
+ {
     chosen {
         zephyr,display = &oled;
         zmk,kscan = &kscan0;
